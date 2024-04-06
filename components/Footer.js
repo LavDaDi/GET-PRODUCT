@@ -1,19 +1,46 @@
 // Footer.js
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import styled from "styled-components";
+ 
+const onPress = () => {
+   console.log('dsdf')
+}
 
 const Footer = () => {
  return (
     <View style={styles.footer}>
-      <Text style={styles.footerText}>подвал</Text>
+      <ButtonContainer onPress={onPress}>
+         <ButtonText><Image   
+         source={require('../img/qr-scan.png')}
+         style={{width: 60, height: 60}}/>
+         </ButtonText>
+      </ButtonContainer>
     </View>
  );
 };
 
+const ButtonContainer = styled.TouchableOpacity`
+    border-radius: 20px;
+    background-color: #FD6F09;
+    width: 100px;
+    height: 100px;
+    margin: 0px  0 0 0
+`;
+
+const ButtonText = styled.Text`
+    height: 770px;
+    text-align:center;
+    margin: -5px  0 0 0
+`;
+
 const styles = StyleSheet.create({
  footer: {
-    height: 60,
-    backgroundColor: 'darkslateblue',
+   marginTop: 30,
+   marginBottom: 15,
+   display: 'flex',
+   alignItems: 'center',
+   justifyContent: 'center'
  },
  footerText: {
     color: 'white',

@@ -13,10 +13,12 @@ export default function Navigate() {
             <Stack.Screen 
                 name='Main'
                 component={Main}
+                options={{ headerShown: false }}
                 />
              <Stack.Screen 
                 name='MainStack'
                 component={MainStack}
+                options={{ headerShown: false }}
                 />   
             
         </Stack.Navigator>
