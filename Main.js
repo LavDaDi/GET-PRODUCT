@@ -14,23 +14,21 @@ const loadScene = () => {
   
  const handleSignUp = async () => { 
      try { 
-       // Создаем объект с данными пользователя 
        const userData = { 
         data: 
            {
              name, 
            password, 
-           contraindications: 'testing, tree ewfw ef wef we f we f' 
+           contraindications: 'Лактоза' 
            } 
-         }; 
-       // Отправляем POST-запрос на сервер с данными пользователя 
+         };  
+
        const response = await axios.post('http://77.91.87.98:5000/registration', userData); 
-       
-       // Обрабатываем успешный ответ от сервера 
+
        console.log(response.data); 
+       navigation.navigate('MainStack');
 
      } catch (error) { 
-       // Обрабатываем возможные ошибки 
        console.error('Error signing up user: ', error); 
      } 
  }; 
@@ -49,11 +47,11 @@ const loadScene = () => {
       <TextInput 
         style={styles.input} 
         value={password} 
-        placeholder="Password" 
+        placeholder="password" 
         secureTextEntry 
         onChangeText={(text) => setPassword(text)} 
       /> 
-      <Button title="Sign Up" onPress={loadScene} /> 
+      <Button title="Sign Up" onPress={handleSignUp} /> 
     </ImageBackground> 
  </View> 
  ); 

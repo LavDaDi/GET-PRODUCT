@@ -14,9 +14,9 @@ const ButtonContainer = styled.TouchableOpacity`
 `;
 
 const ButtonText = styled.Text`
-    height: 77px;
+    height: 87px;
     text-align:center;
-    margin: -10px  0 0 0
+    margin: -15px  0 0 0
 `;
 
 const AppContainer = styled.View`
@@ -24,18 +24,16 @@ const AppContainer = styled.View`
 
 const AppButton = ({ onPress, title }) => (
  <ButtonContainer onPress={onPress}>
-    <ButtonText><Image   source={ {
-        width:55,
-        height:55,
-        uri:'https://cdn-icons-png.flaticon.com/512/109/109596.png'
-    }}/></ButtonText>
+    <ButtonText>
+      <Image  source={require('../img/settings.png')}style={{width: 60, height: 60}}/>
+   </ButtonText>
  </ButtonContainer>
 );
 
 const Header = () => {
  return (
     <View style={styles.header}>
-      <Image  style={styles.logo} source={ require('../img/logo.png')}/>
+      
       <AppContainer>
         <AppButton title=""/>
       </AppContainer>
@@ -50,7 +48,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     marginTop:10,
  },

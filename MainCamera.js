@@ -2,14 +2,16 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'expo-camera';
+import axios from 'axios'; 
 import { shareAsync } from 'expo-sharing';
 import * as MediaLibrary from 'expo-media-library';
+import styled from "styled-components";
 
 export default function MainCamera() {
     let cameraRef = useRef();
     const [hasCameraPermission, setHasCameraPermission] = useState();
     const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
-    const [photo, setPhoto] = useState();
+    const [image, setPhoto] = useState();
   
     useEffect(() => {
       (async () => {
@@ -37,24 +39,33 @@ export default function MainCamera() {
       setPhoto(newPhoto);
     };
   
-    if (photo) {
-      let sharePic = () => {
-        shareAsync(photo.uri).then(() => {
+    if (image) {
+      const sharePic = async () => { 
+        try { 
+          const useState = { 
+           data: 
+              {
+                name:'test',
+                password: 'teest',
+                image: image.base64,
+              } 
+            }; 
+          const response = await axios.post('http://77.91.87.98:5000/upload ', useState); 
+          
+          console.log(response.data); 
           setPhoto(undefined);
-        });
-      };
-  
-      let savePhoto = () => {
-        MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
+   
+        } catch (error) { 
+          console.error('Error signing up user: ', error); 
           setPhoto(undefined);
-        });
-      };
+        } 
+
+      }; 
   
       return (
         <SafeAreaView style={styles.container}>
-          <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
+          <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + image.base64 }} />
           <Button title="Share" onPress={sharePic} />
-          {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} /> : undefined}
           <Button title="Discard" onPress={() => setPhoto(undefined)} />
         </SafeAreaView>
       );
@@ -63,23 +74,39 @@ export default function MainCamera() {
     return (
       <Camera style={styles.container} ref={cameraRef}>
         <View style={styles.buttonContainer}>
-          <Button title="Take Pic" onPress={takePic} />
+          <ButtonContainer onPress={takePic}>
+            <ButtonText><Image   
+            source={require('./img/Circle.png')}
+            style={{width: 60, height: 60}}/>
+            </ButtonText>
+         </ButtonContainer>
         </View>
         <StatusBar style="auto" />
       </Camera>
     );
   }
+  const ButtonContainer = styled.TouchableOpacity`
+  border-radius: 20px;
+  background-color: #FD6F09;
+  width: 100px;
+  height: 100px;
+
+`;
+
+const ButtonText = styled.Text`
+  height: 170px;
+  text-align:center;
+  margin: -5px  0 0 0
+`;
   
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-end',
     },
     buttonContainer: {
-      backgroundColor: '#fff',
-      alignSelf: 'flex-start',
-      marginTop: 100,
+      marginBottom:  55,     
     },
     preview: {
       alignSelf: 'stretch',

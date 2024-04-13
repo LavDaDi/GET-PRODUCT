@@ -2,6 +2,7 @@ import React from 'react';
 import MainStack from "./MainStack";
 import Main from "./Main";
 import MainCamera from "./MainCamera";
+import Statist from "./Statist";
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -25,8 +26,13 @@ export default function Navigate() {
                 name='MainCamera'
                 component={MainCamera}
                 options={{ headerShown: false }}
+                />  
+            <Stack.Screen 
+                name='Statist'
+                component={Statist}
+                options={{ headerShown: false }}
                 />   
-            
+    
         </Stack.Navigator>
     </NavigationContainer>
 }
