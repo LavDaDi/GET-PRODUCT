@@ -7,12 +7,12 @@ import { shareAsync } from 'expo-sharing';
 import * as MediaLibrary from 'expo-media-library';
 import styled from "styled-components";
 
-export default function MainCamera() {
+export default function MainCamera({navigation}) {
     let cameraRef = useRef();
     const [hasCameraPermission, setHasCameraPermission] = useState();
     const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
     const [image, setPhoto] = useState();
-  
+    
     useEffect(() => {
       (async () => {
         const cameraPermission = await Camera.requestCameraPermissionsAsync();
@@ -51,12 +51,15 @@ export default function MainCamera() {
               } 
             }; 
           const response = await axios.post('http://77.91.87.98:5000/upload ', useState); 
-          
+          legg = String(response.data.message)
           console.log(response.data); 
+         // alert(response.data.message)
           setPhoto(undefined);
+          navigation.navigate('Out', {legg});
    
         } catch (error) { 
           console.error('Error signing up user: ', error); 
+          
           setPhoto(undefined);
         } 
 

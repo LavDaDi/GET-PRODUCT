@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import Header from './components/Header';
-import MainContent from './components/MainContent';
+
 import styled from "styled-components";
 
 export default function MainStack({navigation}){

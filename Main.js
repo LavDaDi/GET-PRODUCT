@@ -51,7 +51,7 @@ const loadScene = () => {
         secureTextEntry 
         onChangeText={(text) => setPassword(text)} 
       /> 
-      <Button title="Sign Up" onPress={handleSignUp} /> 
+      <Button title="Sign Up" onPress={loadScene} /> 
     </ImageBackground> 
  </View> 
  ); 
